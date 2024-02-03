@@ -1,0 +1,26 @@
+
+app:
+    jwt-secret: daf66e01593f61a15b857cf433aae03a005812b31234e149036bcc8dee755dbb
+    jwt-expiration-milliseconds: 604800000
+spring:
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://localhost:3306/authentication_spring
+        username: root
+        password:
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.MySQLDialect
+            show-sql: false
+    output:
+        ansi:
+            enabled: ALWAYS
+spring-doc:
+    pathsToMatch: 
+        - /auth/**
+        - /api/**/v1/**
+    swagger-ui:
+        use-root-path: true
