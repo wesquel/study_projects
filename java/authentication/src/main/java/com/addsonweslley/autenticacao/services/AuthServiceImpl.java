@@ -5,7 +5,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.authentication.BadCredentialsException;
 import com.addsonweslley.autenticacao.dto.LoginDto;
 import com.addsonweslley.autenticacao.security.jwt.JwtTokenProvider;
 
@@ -20,17 +20,22 @@ public class AuthServiceImpl implements AuthService {
 
   @Override
   public String login(LoginDto loginDto) {
+    String token = null;
+    try {
 
       Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-              loginDto.getUsernameOrEmail(),
-              loginDto.getPassword()
+            loginDto.getUsernameOrEmail(),
+            loginDto.getPassword()
+            
       ));
 
       SecurityContextHolder.getContext().setAuthentication(authentication);
-      String token = jwtTokenProvider.generateToken(authentication);
+      token = jwtTokenProvider.generateToken(authentication);
 
-      return token;
+    } catch (BadCredentialsException e) {
+      // TODO LOG
+    }
+
+    return token;
   }
-
-  
 }

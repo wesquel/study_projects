@@ -6,13 +6,12 @@ import java.util.Date;
 import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-
-import org.springframework.security.core.Authentication;
 
 @Component
 public class JwtTokenProvider {
@@ -56,13 +55,18 @@ public class JwtTokenProvider {
 	}
 
 	// validate JWT Token
-	public  boolean validateToken(String token){
-		Jwts.parser()
-		.verifyWith((SecretKey) key())
-		.build()
-		.parse(token);
-
-		return true;
+	public boolean validateToken(String token){
+		try {
+			Jwts.parser()
+			.verifyWith((SecretKey) key())
+			.build()
+			.parse(token);
+			return true;
+		} catch (Exception ExpiredJwtException) {
+			// TODO: handle exception
+		}
+	
+		return false;
 	}
 
 
