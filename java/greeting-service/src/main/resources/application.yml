@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: greeting-service
+  output: 
+    ansi: 
+      enabled: ALWAYS
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+        - '*'
+greeting-service:
+  greeting: "Olá"
+  value: "Mundo"
