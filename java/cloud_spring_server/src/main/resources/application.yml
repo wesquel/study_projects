@@ -6,6 +6,13 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
-  profiles:
-    active:
-    - native
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/wesquel/config-server
+          #Private repository
+          #username: username
+          #password: password
+          search-paths:
+          - 'greeting-service*'

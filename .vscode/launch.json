@@ -1,0 +1,20 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "CambioServiceApplication",
+      "request": "launch",
+      "mainClass": "app.netlify.weslley_carvalho.cambioservice.CambioServiceApplication"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-GreetingServiceApplication<greeting-service>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.addson_dev.greetingservice.GreetingServiceApplication",
+      "projectName": "greeting-service",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
