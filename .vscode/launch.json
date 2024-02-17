@@ -15,6 +15,16 @@
       "projectName": "greeting-service",
       "args": "",
       "envFile": "${workspaceFolder}/.env"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-CambioServiceApplication<cambio-service>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "app.netlify.weslley_carvalho.cambioservice.CambioServiceApplication",
+      "projectName": "cambio-service",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
     }
   ]
 }
