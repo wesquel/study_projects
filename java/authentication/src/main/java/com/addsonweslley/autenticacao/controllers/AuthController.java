@@ -26,17 +26,17 @@ public class AuthController  {
   public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
 
     String token = authService.login(loginDto);
-    String mensagem_error = "Usuário inexistente ou senha inválida!";
+    String error_message = " “User not found or invalid password!";
 
     if (token == null){
-      return new ResponseEntity<>(mensagem_error, HttpStatus.OK);
-    }  
+      return new ResponseEntity<>(error_message, HttpStatus.OK);
+    }
 
     JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
     jwtAuthResponse.setAccessToken(token);
 
     return new ResponseEntity<>(jwtAuthResponse, HttpStatus.OK);
-  
+
   }
-    
+
 }
