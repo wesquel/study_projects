@@ -3,6 +3,7 @@ package com.addsonweslley.autenticacao.controllers;
 import com.addsonweslley.autenticacao.dto.User.UserRegister;
 import com.addsonweslley.autenticacao.dto.User.UserResponse;
 import com.addsonweslley.autenticacao.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody UserRegister userRegister) {
+    public ResponseEntity<?> register(@Valid @RequestBody UserRegister userRegister) {
         try{
             UserResponse userResponse = userService.register(userRegister);
             return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
