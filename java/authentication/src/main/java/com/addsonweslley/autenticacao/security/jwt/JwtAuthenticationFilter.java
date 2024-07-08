@@ -33,7 +33,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
      // Get JWT Token from HTTP request
      String token = getTokenFromRequest(request);
 
-     Boolean checkToken = jwtTokenProvider.validateToken(token);
+     boolean checkToken = jwtTokenProvider.validateToken(token);
      // Validate Token
      if(StringUtils.hasText(token) && checkToken){
 
@@ -58,7 +58,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter{
   private String getTokenFromRequest(HttpServletRequest request) {
     String bearerToken = request.getHeader("Authorization");
     if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")){
-      return bearerToken.substring(7, bearerToken.length());
+      return bearerToken.substring(7);
     }
 
     return null;
