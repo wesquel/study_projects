@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -24,8 +23,6 @@ import lombok.AllArgsConstructor;
 @EnableMethodSecurity
 @AllArgsConstructor
 public class SpringSecurityConfig {
-
-  private UserDetailsService userDetailsService;
 
   private JwtAuthenticationEntryPoint authenticationEntryPoint;
 
@@ -44,6 +41,7 @@ public class SpringSecurityConfig {
       //.requestMatchers(HttpMethod.POST, "/api/**").hasRole("ADMIN")
       .requestMatchers("/api/auth/**").permitAll()
       .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+      .requestMatchers(HttpMethod.POST, "/user/register").permitAll()
       .anyRequest().authenticated()
     ).httpBasic(Customizer.withDefaults());
 
