@@ -21,7 +21,6 @@ import lombok.AllArgsConstructor;
 public class AuthController  {
   private AuthServiceImpl authService;
 
-  // Build Login REST API
   @PostMapping("/login")
   public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
 
@@ -29,7 +28,7 @@ public class AuthController  {
     String error_message = " “User not found or invalid password!";
 
     if (token == null){
-      return new ResponseEntity<>(error_message, HttpStatus.OK);
+      return new ResponseEntity<>(error_message, HttpStatus.UNAUTHORIZED);
     }
 
     JwtAuthResponse jwtAuthResponse = new JwtAuthResponse();
