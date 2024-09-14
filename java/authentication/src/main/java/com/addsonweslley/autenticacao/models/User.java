@@ -47,11 +47,17 @@ public class User {
     )
     private Set<Role> roles;
 
-    public User(String name, String username, String email, String password, Set<Role> roles) {
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Column(name = "users_apps")
+    private Set<App> appAccess;
+
+    public User(String name, String username, String email, String password, Set<Role> roles, Set<App> appAccess) {
         this.name = name;
         this.username = username;
         this.email = email;
         this.password = password;
         this.roles = roles;
+        this.appAccess = appAccess;
     }
+
 }
