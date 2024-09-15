@@ -15,9 +15,9 @@ public class DataInitializer {
     CommandLineRunner initRolesDatabase(RoleRepository roleRepository) {
         return args -> {
             if (roleRepository.count() == 0) {
-                roleRepository.save(new Role("USER"));
-                roleRepository.save(new Role("ADMIN"));
-                roleRepository.save(new Role("TEACHER"));
+                roleRepository.save(new Role("ROLE_USER"));
+                roleRepository.save(new Role("ROLE_ADMIN"));
+                roleRepository.save(new Role("ROLE_TEACHER"));
             }
         };
     }

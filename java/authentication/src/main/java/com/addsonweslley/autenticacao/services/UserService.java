@@ -38,7 +38,7 @@ public class UserService {
         }
 
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-        Role role = this.getRole("USER");
+        Role role = this.getRole("ROLE_USER");
 
         HashSet<Role> roles = new HashSet<>();
         roles.add(role);
