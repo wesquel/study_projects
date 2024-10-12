@@ -2,12 +2,14 @@ package com.addsonweslley.autenticacao.services;
 
 import com.addsonweslley.autenticacao.dto.User.UserRegister;
 import com.addsonweslley.autenticacao.dto.User.UserResponse;
+import com.addsonweslley.autenticacao.dto.User.UserResponseFitApi;
 import com.addsonweslley.autenticacao.models.App;
 import com.addsonweslley.autenticacao.models.Role;
 import com.addsonweslley.autenticacao.models.User;
 import com.addsonweslley.autenticacao.repositorys.AppRepository;
 import com.addsonweslley.autenticacao.repositorys.RoleRepository;
 import com.addsonweslley.autenticacao.repositorys.UserRepository;
+import com.addsonweslley.autenticacao.services.publisher.UserEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,11 +26,13 @@ public class UserService {
     private final RoleRepository roleRepository;
 
     private final AppRepository appRepository;
+    private final UserEventPublisher userEventPublisher;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository, AppRepository appRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, AppRepository appRepository, UserEventPublisher userEventPublisher) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.appRepository = appRepository;
+        this.userEventPublisher = userEventPublisher;
     }
 
     public UserResponse register(UserRegister userRegister) {
@@ -59,6 +63,7 @@ public class UserService {
         );
 
         User userSave = userRepository.save(user);
+        userEventPublisher.publishUserCreatedEvent(UserResponseFitApi.fromUser(userSave));
         return UserResponse.fromUser(userSave);
     }
 
