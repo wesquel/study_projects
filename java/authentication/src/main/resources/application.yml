@@ -7,7 +7,7 @@ spring:
         driver-class-name: com.mysql.jdbc.Driver
         url: jdbc:mysql://localhost:3306/authentication_spring
         username: root
-        password:
+        password: root
     jpa:
         hibernate:
             ddl-auto: update
@@ -15,11 +15,16 @@ spring:
             hibernate:
                 dialect: org.hibernate.dialect.MySQLDialect
             show-sql: false
+    kafka:
+        bootstrap-servers: localhost:9092
+        producer:
+            key-serializer: org.apache.kafka.common.serialization.StringSerializer
+            value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     output:
         ansi:
             enabled: ALWAYS
 spring-doc:
-    pathsToMatch: 
+    pathsToMatch:
         - /auth/**
         - /api/**/v1/**
     swagger-ui:
